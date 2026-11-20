@@ -16,7 +16,11 @@ func newRootCmd() *cobra.Command {
 
 func Execute() {
 	root := newRootCmd()
-	root.AddCommand(newVersionCmd())
+
+	root.AddCommand(
+		newVersionCmd(),
+		newBlockCmd(),
+	)
 
 	if err := root.Execute(); err != nil {
 		os.Exit(1)
