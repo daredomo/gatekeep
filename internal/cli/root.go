@@ -18,6 +18,7 @@ func Execute() {
 	root := newRootCmd()
 
 	root.AddCommand(
+		newInstallCmd(),
 		newVersionCmd(),
 		newBlockCmd(),
 	)
