@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"gatekeep/internal/config"
 	"gatekeep/internal/country"
 	"gatekeep/internal/shim"
 )
@@ -41,6 +42,15 @@ func runBlock(cmd *cobra.Command, args []string) error {
 		codes = append(codes, code)
 	}
 	if err := shim.Add(args[0]); err != nil {
+		return err
+	}
+
+	rules, err := config.Load()
+	if err != nil {
+		return err
+	}
+	config.Add(rules, args[0], codes)
+	if err := config.Save(rules); err != nil {
 		return err
 	}
 	fmt.Fprintf(cmd.OutOrStdout(), "%s blocked in: %s\n", args[0], strings.Join(codes, ", "))

@@ -55,15 +55,15 @@ func Save(rules Rules) error {
 }
 
 func Add(rules Rules, command string, codes []string) {
-	for _, code := range rules {
+	for _, code := range codes {
 		if !contains(rules[command], code) {
-			rules[commands] = append(rules[command], code)
+			rules[command] = append(rules[command], code)
 		}
 	}
 }
 
 func contains(list []string, item string) bool {
-	for _, o := range list {
+	for _, v := range list {
 		if v == item {
 			return true
 		}
