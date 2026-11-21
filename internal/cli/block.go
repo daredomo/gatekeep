@@ -22,6 +22,9 @@ func newBlockCmd() *cobra.Command {
 }
 
 func runBlock(cmd *cobra.Command, args []string) error {
+	if args[0] == "gatekeep" {
+		return fmt.Errorf("cannot block gatekeep itself")
+	}
 	countries, err := cmd.Flags().GetStringSlice("in")
 	if err != nil {
 		return err
