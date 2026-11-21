@@ -2,10 +2,12 @@ package cli
 
 import (
 	"fmt"
-	"gatekeep/internal/country"
 	"strings"
 
 	"github.com/spf13/cobra"
+
+	"gatekeep/internal/country"
+	"gatekeep/internal/shim"
 )
 
 func newBlockCmd() *cobra.Command {
@@ -37,6 +39,9 @@ func runBlock(cmd *cobra.Command, args []string) error {
 			return err
 		}
 		codes = append(codes, code)
+	}
+	if err := shim.Add(args[0]); err != nil {
+		return err
 	}
 	fmt.Fprintf(cmd.OutOrStdout(), "%s blocked in: %s\n", args[0], strings.Join(codes, ", "))
 	return nil
