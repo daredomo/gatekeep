@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"slices"
 	"errors"
 	"os"
 	"path/filepath"
@@ -56,17 +57,8 @@ func Save(rules Rules) error {
 
 func Add(rules Rules, command string, codes []string) {
 	for _, code := range codes {
-		if !contains(rules[command], code) {
+		if !slices.Contains(rules[command], code) {
 			rules[command] = append(rules[command], code)
 		}
 	}
-}
-
-func contains(list []string, item string) bool {
-	for _, v := range list {
-		if v == item {
-			return true
-		}
-	}
-	return false
 }
