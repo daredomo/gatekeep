@@ -2,10 +2,10 @@ package config
 
 import (
 	"encoding/json"
-	"slices"
 	"errors"
 	"os"
 	"path/filepath"
+	"slices"
 )
 
 type Rules map[string][]string
